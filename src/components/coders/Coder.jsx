@@ -1,26 +1,27 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { api } from "../../services/api"
 
 
 const Coder = () => {
     const [coders, setCoders] = useState([
-        {
-            id:1,
-            name: "Ingrid",
-            age: 32
-        },
-        {
-            id:2,
-            name: "Charlotte",
-            age: 25
-        },
-        {
-            id:3,
-            name: "Manon",
-            age: 18
-        }
     ])
 
     const [form, setForm] = useState({name: "", age: ""})
+
+    const apiCoders = api();
+
+    //acoplamiento
+    useEffect(() => {
+        /* fetch("http://localhost:3000/patata")
+        .then(response => response.json())
+        .then(data => setCoders(data))
+        .catch(error => console.log("fallo conexion", error)) */
+        apiCoders.getCoders().then(data => {
+            console.log(data)
+            setCoders(data)
+        })
+    
+    }, [])
 
     const handleChange = (event) => {
         /* console.log(event.target.value) */
@@ -32,10 +33,13 @@ const Coder = () => {
 
     const handleSubmmit = (event) => {
         event.preventDefault()
-        setCoders([
+        /* setCoders([
             ...coders,
             form
-        ])
+        ]) */
+        apiCoders.addCoder(form)
+        .then(response => setCoders([...coders, response]))
+    
     }
 
     return (
