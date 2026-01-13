@@ -16,6 +16,10 @@ export const router = createBrowserRouter([
                 Component: Home,
                 children: [
                     {
+                        index: true,
+                        Component: Section1
+                    },
+                    {
                         path: "/section1",
                         Component: Section1
                     },
