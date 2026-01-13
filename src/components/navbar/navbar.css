@@ -1,3 +1,9 @@
 .active{
     background-color: aqua;
 }
+
+.navlink {
+    margin: 2%;
+    text-decoration: none;
+    color: black;
+}

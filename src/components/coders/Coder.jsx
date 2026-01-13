@@ -1,12 +1,14 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import { api } from "../../services/api"
+import { CounterContext } from "../../context/counter/CounterContext"
 
 
 const Coder = () => {
+    const { counter } = useContext(CounterContext);
     const [coders, setCoders] = useState([
     ])
 
-    const [form, setForm] = useState({name: "", age: ""})
+    const [form, setForm] = useState({ name: "", age: "" })
 
     const apiCoders = api();
 
@@ -20,7 +22,7 @@ const Coder = () => {
             console.log(data)
             setCoders(data)
         })
-    
+
     }, [])
 
     const handleChange = (event) => {
@@ -38,20 +40,21 @@ const Coder = () => {
             form
         ]) */
         apiCoders.addCoder(form)
-        .then(response => setCoders([...coders, response]))
-    
+            .then(response => setCoders([...coders, response]))
+
     }
 
     return (
         <>
+            <h2>{counter}</h2>
             <form onSubmit={handleSubmmit}>
                 <div>
                     <label htmlFor="name">Nombre</label>
-                    <input type="text" name="name" id="name" onChange={handleChange}/>
+                    <input type="text" name="name" id="name" onChange={handleChange} />
                 </div>
                 <div>
                     <label htmlFor="">Edad</label>
-                    <input type="text" name="age" id="age" onChange={handleChange}/>
+                    <input type="text" name="age" id="age" onChange={handleChange} />
                 </div>
                 <button type="submmit">Crear Coder</button>
             </form>

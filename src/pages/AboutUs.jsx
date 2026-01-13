@@ -1,6 +1,13 @@
+import { useContext } from "react"
+import { CounterContext } from "../context/counter/CounterContext"
+
 const AboutUs = () => {
+    const {increment} = useContext(CounterContext);
     return (
-        <div>AboutUs page</div>
+        <>
+        AboutUs page
+        <button onClick={increment}>Incrmentar</button>
+        </>
     )
 }
 

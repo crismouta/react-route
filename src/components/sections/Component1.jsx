@@ -1,6 +1,10 @@
+import { useContext } from "react"
+import { UserContext } from "../../context/user/UserContext"
+
 const Component1 = () => {
+    const user = useContext(UserContext);
     return (
-        <div>Soy el Component1</div>
+        <div>Hola {user} Soy el Componente 1</div>
     )
 }
 
